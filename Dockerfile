@@ -3,8 +3,10 @@ FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND noninteractive
 
 ## Install php nginx mysql supervisor
+RUN apt-get install python-software-properties
+RUN add-apt-repository ppa:ondrej/php5-oldstable
 RUN apt update && \
-    apt install -y php-fpm php-cli php-gd php-mcrypt php-mysql php-curl php-xml \
+    apt install -y php5-fpm php5-cli php5-gd php5-mcrypt php5-mysql php5-curl php5-xml \
                        nginx \
                        curl \
 		       supervisor && \
@@ -20,11 +22,8 @@ RUN sed -i 's/^listen\s*=.*$/listen = 127.0.0.1:9000/' /etc/php/7.0/fpm/pool.d/w
     sed -i 's/^key_buffer\s*=/key_buffer_size =/' /etc/mysql/my.cnf
 
 COPY files/root /
-
 WORKDIR /var/www/
-
 VOLUME /var/www/
-
 EXPOSE 80
 
 ENTRYPOINT ["/entrypoint.sh"]
