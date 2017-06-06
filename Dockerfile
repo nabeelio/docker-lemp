@@ -3,7 +3,7 @@ FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND noninteractive
 
 ## Install php nginx mysql supervisor
-RUN apt-get install python-software-properties
+RUN apt-get install -y python-software-properties
 RUN add-apt-repository ppa:ondrej/php5-oldstable
 RUN apt update && \
     apt install -y php5-fpm php5-cli php5-gd php5-mcrypt php5-mysql php5-curl php5-xml \
